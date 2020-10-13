@@ -4,7 +4,7 @@
 
 ✨ 请自己清理 sentinel.conf 中的 `sentinel myid` 运行时候重新生成新的 ID
 
-✨ 使用的时候请修改 sentinel*.conf 文件中的 `sentinel monitor mymaster xx 6379 2` 改为 `sentinel monitor mymaster redisMaster 6379 2` 让哨兵自动解析
+✨ 使用的时候请修改 sentinel*.conf 文件中的 `sentinel monitor mymaster xx 6379 2` 改为 `sentinel monitor mymaster redis1 6379 2` 让哨兵自动解析
 
 ✨ 目录结构
 
@@ -29,14 +29,15 @@
 ```conf
 
 # sentinel auth-pass mymaster 123456
-sentinel monitor mymaster redisMaster 6379 2 
+sentinel monitor mymaster redis1 6379 2 
 logfile "/var/log/redis/sentinel.log"
+protected-mode no
 
 ```
 
 
 
-因为 sentinel 在运行的时候会自动更改 `sentinel monitor mymaster` 获取 docker 的真实 IP . 在使用的时候请配置好 IP 获取设置为 `redisMaster` 
+因为 sentinel 在运行的时候会自动更改 `sentinel monitor mymaster` 获取 docker 的真实 IP . 在使用的时候请配置好 IP 获取设置为 `redis1` 
 
 所有配置都是为了测试我的 Jedis. 如果线上使用请修改 redis 和 sentinel 为合理配置并强烈推荐设置密码.
 
