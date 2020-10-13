@@ -4,12 +4,12 @@ services:
     # ------------------------------------#
     #             Redis Server            #
     # ------------------------------------#
-    redisMaster:
+    redis1:
         image: redis:latest
-        container_name: "redisMaster"
+        container_name: "redis1"
         volumes:
-            - "./config/master.conf:/usr/local/etc/redis/redis.conf"
-            - "./logs/redis/redis1.log:/var/log/redis/redis.log"
+            - "./config/redis1.conf:/usr/local/etc/redis/redis.conf"
+            - "./logs/redis:/var/log/redis"
         # restart: always
         ports:
             - "6379:6379"
@@ -17,12 +17,12 @@ services:
         networks:
             - sentinel
     # -----------------
-    redisSlave:
+    redis2:
         image: redis:latest
-        container_name: "redisSlave"
+        container_name: "redis2"
         volumes:
-            - "./config/slave.conf:/usr/local/etc/redis/redis.conf"
-            - "./logs/redis/redis2.log:/var/log/redis/redis.log"
+            - "./config/redis2.conf:/usr/local/etc/redis/redis.conf"
+            - "./logs/redis:/var/log/redis"
         # restart: always
         ports:
             - "6380:6379"
@@ -30,24 +30,22 @@ services:
         networks:
             - sentinel
         depends_on:
-            - redisMaster
+            - redis1
     # -----------------
-    redisSlave2:
+    redis3:
         image: redis:latest
-        container_name: "redisSlave2"
+        container_name: "redis3"
         volumes:
-            - "./config/slave2.conf:/usr/local/etc/redis/redis.conf"
-            - "./logs/redis/redis3.log:/var/log/redis/redis.log"
+            - "./config/redis3.conf:/usr/local/etc/redis/redis.conf"
+            - "./logs/redis:/var/log/redis"
         # restart: always
         ports:
             - "6381:6379"
-        expose:
-            - "6379"
         command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
         networks:
             - sentinel
         depends_on:
-            - redisMaster
+            - redis1
     # ------------------------------------#
     #           Redis Sentinel            #
     # ------------------------------------#
@@ -55,8 +53,8 @@ services:
         image: redis:latest
         container_name: "redisSentinel"
         volumes:
-            - "./config/sentinel.conf:/usr/local/etc/redis/sentinel.conf"
-            - "./logs/sentinel/sentinel1.log:/var/log/redis/sentinel.log"
+            - "./config/sentinel1.conf:/usr/local/etc/redis/sentinel.conf"
+            - "./logs/sentinel:/var/log/redis"
         # restart: always
         ports:
             - "26379:26379"
@@ -64,14 +62,14 @@ services:
         networks:
             - sentinel
         depends_on:
-            - redisMaster
+            - redis1
     # -----------------
     redisSentinel2:
         image: redis:latest
         container_name: "redisSentinel2"
         volumes:
             - "./config/sentinel2.conf:/usr/local/etc/redis/sentinel.conf"
-            - "./logs/sentinel/sentinel2.log:/var/log/redis/sentinel.log"
+            - "./logs/sentinel:/var/log/redis"
         ports:
             - "26380:26379"
         # restart: always
@@ -79,14 +77,14 @@ services:
         networks:
             - sentinel
         depends_on:
-            - redisMaster
+            - redis1
     # -----------------
     redisSentinel3:
         image: redis:latest
         container_name: "redisSentinel3"
         volumes:
             - "./config/sentinel3.conf:/usr/local/etc/redis/sentinel.conf"
-            - "./logs/sentinel/sentinel3.log:/var/log/redis/sentinel.log"
+            - "./logs/sentinel:/var/log/redis"
         ports:
             - "26381:26379"
         # restart: always
@@ -94,6 +92,6 @@ services:
         networks:
             - sentinel
         depends_on:
-            - redisMaster
+            - redis1
 networks:
     sentinel:
