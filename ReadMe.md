@@ -9,21 +9,20 @@
 ✨ 目录结构
 
 ```
+├── ReadMe.md
+├── clear.sh
 ├── config
-│   ├── default
-│   │   ├── redis.conf
-│   │   └── sentinel.conf
-│   ├── redis1.conf
-│   ├── redis2.conf
-│   ├── redis3.conf
-│   ├── sentinel1.conf
-│   ├── sentinel2.conf
-│   └── sentinel3.conf
-├── docker-compose.yml ----------- 启动文件
+│   ├── base
+│   ├── default
+│   ├── redis1.conf
+│   ├── redis2.conf
+│   ├── redis3.conf
+│   ├── sentinel1.conf
+│   ├── sentinel2.conf
+│   └── sentinel3.conf
+├── docker-compose.yml
 └── logs
-    ├── redis -------------------- redis 日志
-    └── sentinel ----------------- 哨兵日志
-```
+
 ✨ config - sentinel*.conf 默认配置
 
 ```conf
@@ -34,8 +33,6 @@ logfile "/var/log/redis/sentinel.log"
 protected-mode no
 
 ```
-
-
 
 因为 sentinel 在运行的时候会自动更改 `sentinel monitor mymaster` 获取 docker 的真实 IP . 在使用的时候请配置好 IP 获取设置为 `redis1` 
 
@@ -48,5 +45,8 @@ protected-mode no
 $ chmod +x clear.sh # 增加执行权限
 $ ./clear.sh
 ```
+
+如果是正式部署请删除 clear.sh && config.bash && config.default ,防止手滑。
+
 
 **此程序不是开箱即用,请勿直接使用,请勿直接使用,请勿直接使用.**
