@@ -63,8 +63,6 @@ services:
             - sentinel
         depends_on:
             - redis1
-            - redis2
-            - redis3
     # -----------------
     redisSentinel2:
         image: redis:latest
@@ -80,8 +78,6 @@ services:
             - sentinel
         depends_on:
             - redis1
-            - redis2
-            - redis3
     # -----------------
     redisSentinel3:
         image: redis:latest
@@ -97,7 +93,5 @@ services:
             - sentinel
         depends_on:
             - redis1
-            - redis2
-            - redis3
 networks:
     sentinel:

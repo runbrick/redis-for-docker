@@ -50,3 +50,6 @@
     // 返回结果 valuePool
 
 ```
+
+✨ 因为 MAC 的原因所以要配置特殊的 DNS `host.docker.internal`,不适用于其他系统.其他系统请注释掉 DNS.资料来自于 [https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds)
+
