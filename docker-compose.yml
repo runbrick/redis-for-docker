@@ -11,10 +11,10 @@ services:
             - "./config/redis1.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
+        ports: 
+            - 6379:6379
         command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
         network_mode: "host"
-        networks:
-            - sentinel
     # -----------------
     redis2:
         image: redis:latest
@@ -23,6 +23,8 @@ services:
             - "./config/redis2.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
+        ports: 
+            - 6380:6380
         command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
         network_mode: "host"
         depends_on:
@@ -35,6 +37,8 @@ services:
             - "./config/redis3.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
+        ports: 
+            - 6381:6381
         command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
         network_mode: "host"
         depends_on:
@@ -49,6 +53,8 @@ services:
             - "./config/sentinel1.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
         # restart: always
+        ports: 
+            - 26379:26379
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
         network_mode: "host"
         depends_on:
@@ -61,6 +67,8 @@ services:
             - "./config/sentinel2.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
         # restart: always
+        ports: 
+            - 26380:26380
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
         network_mode: "host"
         depends_on:
@@ -73,6 +81,8 @@ services:
             - "./config/sentinel3.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
         # restart: always
+        ports: 
+            - 26381:26381
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
         network_mode: "host"
         depends_on:
