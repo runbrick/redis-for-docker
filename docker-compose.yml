@@ -11,9 +11,8 @@ services:
             - "./config/redis1.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
-        ports:
-            - "6379:6379"
         command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+        network_mode: "host"
         networks:
             - sentinel
     # -----------------
@@ -24,11 +23,8 @@ services:
             - "./config/redis2.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
-        ports:
-            - "6380:6379"
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "redis1", "6379"]
-        networks:
-            - sentinel
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "${SERVER_IP}", "6379"]
+        network_mode: "host"
         depends_on:
             - redis1
     # -----------------
@@ -39,11 +35,8 @@ services:
             - "./config/redis3.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
-        ports:
-            - "6381:6379"
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "redis1", "6379"]
-        networks:
-            - sentinel
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "${SERVER_IP}", "6379"]
+        network_mode: "host"
         depends_on:
             - redis1
     # ------------------------------------#
@@ -56,11 +49,8 @@ services:
             - "./config/sentinel1.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
         # restart: always
-        ports:
-            - "26379:26379"
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
-        networks:
-            - sentinel
+        network_mode: "host"
         depends_on:
             - redis1
     # -----------------
@@ -70,12 +60,9 @@ services:
         volumes:
             - "./config/sentinel2.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
-        ports:
-            - "26380:26379"
         # restart: always
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
-        networks:
-            - sentinel
+        network_mode: "host"
         depends_on:
             - redis1
     # -----------------
@@ -85,13 +72,8 @@ services:
         volumes:
             - "./config/sentinel3.conf:/usr/local/etc/redis/sentinel.conf"
             - "./logs/sentinel:/var/log/redis"
-        ports:
-            - "26381:26379"
         # restart: always
         command: ["redis-sentinel", "/usr/local/etc/redis/sentinel.conf"]
-        networks:
-            - sentinel
+        network_mode: "host"
         depends_on:
             - redis1
-networks:
-    sentinel:
