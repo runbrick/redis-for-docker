@@ -25,7 +25,7 @@ services:
         # restart: always
         ports: 
             - 6380:6380
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "127.0.0.1", "6379"]
         network_mode: "host"
         depends_on:
             - redis1
@@ -39,7 +39,7 @@ services:
         # restart: always
         ports: 
             - 6381:6381
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "127.0.0.1", "6379"]
         network_mode: "host"
         depends_on:
             - redis1
