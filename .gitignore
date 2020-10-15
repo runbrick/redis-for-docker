@@ -1,4 +1,4 @@
 .DS_Store
-logs/redis
-logs/sentinel
+logs/redis/*.log
+logs/sentinel/*.log
 config/*.conf
