@@ -24,7 +24,7 @@
 
 ```
 
-✨ 修改所有 `replica-announce-port` 的 ip 地址为服务器地址
+✨ 修改 `config/*conf` 下所有 `replica-announce-port <ip>` 和 `sentinel monitor mymaster <ip> 6379 2 ` 的 ip 地址为服务器地址
 
 ✨ 使用前请先执行 `init.sh` 程序初始化配置文件
 
