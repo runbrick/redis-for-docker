@@ -23,7 +23,7 @@ services:
             - "./config/redis2.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "${SERVER_IP}", "6379"]
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
         network_mode: "host"
         depends_on:
             - redis1
@@ -35,7 +35,7 @@ services:
             - "./config/redis3.conf:/usr/local/etc/redis/redis.conf"
             - "./logs/redis:/var/log/redis"
         # restart: always
-        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "${SERVER_IP}", "6379"]
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf","--slaveof", "192.168.3.3", "6379"]
         network_mode: "host"
         depends_on:
             - redis1
