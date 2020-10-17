@@ -34,5 +34,7 @@
     - [https://blog.csdn.net/Mr0o0rM/article/details/80683115](https://blog.csdn.net/Mr0o0rM/article/details/80683115)
     - [https://redis.io/topics/sentinel](https://redis.io/topics/sentinel)
     - [https://redis.io/topics/replication#configuring-replication-in-docker-and-nat](https://redis.io/topics/replication#configuring-replication-in-docker-and-nat)
+    - [https://www.haoyizebo.com/posts/fd0b9bd8/](https://www.haoyizebo.com/posts/fd0b9bd8/)
 
 ✨ 如果为腾讯云或者阿里云服务器,请关闭所有安全组或者开放需要的端口并且打开服务所需要的端口
+
